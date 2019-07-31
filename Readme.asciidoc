@@ -1,3 +1,8 @@
 
+
 vim plugins managed via vim-plugged
 tmux plugins managed via tmux/ tpm
+
+== Arrange
+
+* symlink ~/dotfiles/zsh-zim to ~/.zim

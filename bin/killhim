@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+if [ -z $1 ]; then
+  echo needs program name
+  exit 1
+else
+  prg=$(which $1)
+  if [ $? -gt 0 ]; then
+    echo "probably no such program: $1"
+    exit 1
+  fi
+  id=$(pidof $prg)
+  if [ $? -gt 0 ]; then
+    echo "probably no such program running: $prg"
+    exit 1
+  fi
+  echo "I KILL ALL OF HIS!!! $prg with ID $id"
+  sudo kill -9 $id
+fi
+
+exit 0

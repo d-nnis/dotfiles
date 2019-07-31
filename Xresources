@@ -1,0 +1,228 @@
+!fc-list
+!URxvt*font:            xft:Consolass:style=Regular:size=11
+!URxvt*boldFont:        xft:Dosis:style=Bold:size=11
+!URxvt*italicFont:      xft:Anonymous Pro:style=Italic:autohint=true:size=11
+!URxvt*boldItalicFont:  xft:Anonymous Pro:style=Bold Italic:autohint=true:size=11
+!URxvt*font:            xft:Anonymous Pro:style=Regular:size=11
+!URxvt*boldFont:        xft:Anonymous Pro:style=Bold:size=11
+!URxvt*italicFont:      xft:Anonymous Pro:style=Italic:autohint=true:size=11
+!URxvt*boldItalicFont:  xft:Anonymous Pro:style=Bold Italic:autohint=true:size=11
+!TODO: change geometry with keyboard-shortcuts
+! *geometry:        120x50
+!*geometry:	200x300
+!URxvt*font:            xft:Inconsolata for Powerline:size=12
+!URxvt*font:            xft:Droid Sans Mono Dotted:style=Regular:size=12
+!URxvt*boldFont:        xft:Inconsolata for Powerline:bold:size=12
+!URxvt*italicFont:      xft:Inconsolata for Powerline:italic:autohint=true:size=12
+!URxvt*boldItalicFont:  xft:Inconsolata for Powerline:bold:italic:autohint=true:size=12
+URxvt*font:            xft:DejaVu Sans Mono:style=Book:size=10
+URxvt*boldFont:        xft:DejaVu Sans Mono:style=Bold:size=10
+URxvt*italicFont:      xft:DejaVu Sans Mono:style=Oblique:size=10
+URxvt*boldItalicFont:  xft:DejaVu Sans Mono:style=Bold Oblique:size=10
+URxvt*geometry:        110x40
+
+UXTerm*faceName: DejaVu Sans Mono
+UXTerm*faceSize: 10
+UXTerm*scaleHeight: 0.95
+XTerm*faceName: DejaVu Sans Mono
+XTerm*faceSize: 10
+XTerm*scaleHeight: 0.95
+
+!URxvt.font:  9x15
+
+!URxvt.letterSpace: -2
+!URxvt.terminalName:rxvt-unicode-256color
+!URxvt.terminalName:screen-256color
+XTerm*termName: xterm-256color
+URxvt*termName: rxvt-unicode
+!URxvt*termName: xterm-256color
+!URxvt*termName:screen-256color
+! https://github.com/muennich/urxvt-perls
+! URxvt.perl-lib: 
+
+*clipboard.copycmd:  xsel -ib
+*clipboard.pastecmd: xsel -ob
+!*title: XTerm
+!A wildcard between  the
+!       top-level  “XTerm” and the “vt100” widget makes the resource
+!              settings work for either, e.g., “XTerm*vt100.NAME”.
+!XTerm*vt100.electToClipboard: true
+*selectToClipboard: true
+
+
+URxvt.perl-lib: ~/.urxvt/ext
+!clipboard
+!URxvt.perl-ext-common: keyboard-select,fullscreen,tabbed
+URxvt.perl-ext-common: fullscreen,font-size
+URxvt.perl-ext: keyboard-select
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.M-s: perl:keyboard-select:search
+
+URxvt.keysym.F11:       perl:fullscreen:switch
+URxvt.buffered:                true
+URxvt.saveLines:               2000
+
+URxvt.url-select.button:2
+! under line any urls.
+! TODO: Is there an option to do this on hover?
+URxvt.url-select.underline: true
+! Set the color for underline text.
+! Most people just set this to yellow if on a black background.
+! Blue on a white background.
+!URxvt.colorUL: #ffff00
+! Set the color for the underline itself.  If not set, it will use the foreground color.
+!URxvt*underlineColor: #ffff00
+
+! http://pastebin.com/7KZt0fYW
+URxvt.scrollBar: off
+*cursorBlink: true
+
+!urxvt*depth: 32
+!urxvt*background: rgba:0000/0000/0200/c800
+!URxvt.transparent: false
+URxvt*transparent: true
+! the smaller the number the darker
+URxvt*shading: 20
+! doesnt work for xterm
+!*transparent: true
+!*tintColor:#ffb08d
+
+!URxvt.borderLess: false
+
+! font-size
+URxvt.keysym.C-M-plus:     perl:font-size:increase
+URxvt.keysym.C-M-minus:   perl:font-size:decrease
+! URxvt.keysym.C-S-Up:   perl:font-size:incglobal
+! URxvt.keysym.C-S-Down: perl:font-size:decglobal
+URxvt.font-size.step: 1
+!URxvt.keysym.C-F9: perl:font-size:abs15
+!URxvt.keysym.C-6: perl:font-size:reset
+!URxvt.keysym.C-7: command:\033]11;S_base03\007
+URxvt.keysym.C-equal:  perl:font-size:reset
+URxvt.keysym.C-slash:  perl:font-size:show
+
+XTerm*eightBitInput:   false
+XTerm*metaSendsEscape: true
+
+rxvt*modifier: alt
+
+! clipboard
+! Use keyboard shortcuts to copy the selection to the clipboard 
+! and to paste the clipboard contents (optionally escaping all special characters).
+! Me gusta.
+!URxvt.keysym.M-y:   perl:clipboard:copy
+!URxvt.keysym.M-v:   perl:clipboard:paste
+!URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
+!! color definition
+!!URxvt.color12: rgb:5c/5c/ff
+
+!! Quick n dirty: solarized dark
+!! https://github.com/solarized/xresources
+#define S_base03        #002b36
+#define S_base02        #073642
+#define S_base01        #586e75
+#define S_base00        #657b83
+#define S_base0         #839496
+#define S_base1         #93a1a1
+#define S_base2         #eee8d5
+#define S_base3         #fdf6e3
+
+*background:            S_base03
+*foreground:            S_base0
+*fadeColor:             S_base03
+*cursorColor:           S_base1
+*pointerColorBackground:S_base01
+*pointerColorForeground:S_base1
+
+#define S_yellow        #b58900
+#define S_orange        #cb4b16
+#define S_red           #dc322f
+#define S_magenta       #d33682
+#define S_violet        #6c71c4
+#define S_blue          #268bd2
+#define S_cyan          #2aa198
+#define S_green         #859900
+
+!! black dark/light
+*color0:                S_base02
+*color8:                S_base03
+
+!! red dark/light
+*color1:                S_red
+*color9:                S_orange
+
+!! green dark/light
+*color2:                S_green
+*color10:               S_base01
+
+!! yellow dark/light
+*color3:                S_yellow
+*color11:               S_base00
+
+!! blue dark/light
+*color4:                S_blue
+*color12:               S_base0
+
+!! magenta dark/light
+*color5:                S_magenta
+*color13:               S_violet
+
+!! cyan dark/light
+*color6:                S_cyan
+*color14:               S_base1
+
+!! white dark/light
+*color7:                S_base2
+*color15:               S_base3
+
+! Switch background w/ C-7, 8, 9
+! change to default background
+!URxvt.keysym.C-7: command:\033]11;#002b36\007
+URxvt.keysym.C-7:	command:\033]11;#002b36\007
+! change to light background
+URxvt.keysym.C-8: command:\033]11;#ffffff\007
+! change to dark gray background
+URxvt.keysym.C-9: command:\033]11;#777777\007
+
+!! (near) Standard colors
+!*color0:			#000000
+!*color1:			#c00000
+!*color2:			#008000
+!*color3:			#808000
+!*color4:			#0000c0
+!*color5:			#c000c0
+!*color6:			#008080
+!*color7:			#c0c0c0
+!*color8:			#808080
+!*color9:			#ff6060
+!*color10:			#00ff00
+!*color11:			#ffff00
+!*color12:			#8080ff
+!*color13:			#ff40ff
+!*color14:			#00ffff
+!*color15:			#ffffff
+
+! Instance names (starts with lower-case letter) take precedence over class names (starts with upper-case letter).
+! WM_CLASS(STRING) = "xterm", "XTerm"
+xclock*geometry: 200x200
+
+! qutebrowser*geometry: 100x200
+
+! rofi. S.a. ~/.config/rofi/config
+! "Terminal to use" Set from: Default
+!rofi.terminal:                       rofi-sensible-terminal
+!rofi.terminal: urxvtc
+rofi.color-enabled: true
+! rofi.color-window: argb:dd2f343f, #002b36, #292929
+! rofi.color-normal: argb:002f343f, #ffffff, argb:0022f343f, argb:002f343f, #19e4b0
+! rofi.color-active: argb:002f343f, #ffffff, argb:002f343f, argb:002f343f, #ffffff
+! rofi.color-urgent: argb:002f343f, #ff0000, argb:002f343f, argb:002f343f, #ff0000
+! rofi.width: 50
+! !rofi.lines: 3
+! rofi.columns: 1
+! rofi.font: Noto Sans 14
+! rofi.bw: 0
+! rofi.padding: 200
+! rofi.eh: 1
+! !rofi.separator-style: solid
+! !rofi.hide-scrollbar: true

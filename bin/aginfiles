@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+firstopt=$1
+
+if [[ $firstopt == -* ]];then
+  options=$firstopt
+  shift
+  pattern=$1
+  shift
+  files=$@
+else
+  pattern=$1
+  shift
+  files+=$@
+fi
+
+for file in $files; do
+  if [ -f $file ]; then
+    ag $options $pattern $file
+  fi
+done
+
+# ls | find -exec ag -l "Vorwort" {} \;
+# vs
+# ls *.conf | xargs ag "Vorwort"
+# vs
+# ls *.conf | xargs ag "Vorwort"
+
+
+# TODO:
+# with more than one word
+# options handling
+#

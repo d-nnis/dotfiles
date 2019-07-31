@@ -1,0 +1,52 @@
+
+## qutebrowser
+config/qutebrowser/bookmarks
+config/qutebrowser/quickmarks
+
+## tmux
+tmux/resurrect/*
+tmux/plugins/*
+## managed via tpm
+#tmux/plugins/tmux-colors-solarized/
+#tmux/plugins/tmux-continuum/
+#tmux/plugins/tmux-copycat/
+#tmux/plugins/tmux-cpu/
+#tmux/plugins/tmux-fingers/
+#tmux/plugins/tmux-resurrect/
+#tmux/plugins/tmux-sensible/
+#tmux/plugins/tmux-yank/
+#tmux/plugins/vim-tmux/
+
+## vim
+## managed via VimPlug
+vim/plugged/*
+config/vifm/vifminfo
+
+## config
+### mc
+config/mc/*
+!config/mc/ini
+!config/mc/panels.ini
+!config/mc/mc.ext
+!config/mc/solarized.ini
+!config/mc/mc.keymap
+
+## moc
+moc/cache/*
+moc/last_directory
+moc/pid
+moc/mocp_client_log
+moc/playlist.m3u
+moc/equalizer
+
+## w3m
+w3m/cookie
+w3m/history
+
+## misc
+.netrwhist
+w3m/cookies
+
+## sockets
+socket*
+urxvt/urxvtd-*

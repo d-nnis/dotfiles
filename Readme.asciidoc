@@ -1,0 +1,3 @@
+
+vim plugins managed via vim-plugged
+tmux plugins managed via tmux/ tpm

@@ -1,0 +1,9 @@
+#env
+LESS = -G
+LESSOPEN=|/bin/lesspipe %s
+#LESS = '-F -i -M -R -w -X -z-4 -j.1'
+
+
+
+#it decompresses gzipped files, shows content listings for many multi-file archive formats, and converts several formatted texts formats to plain text.
+#s.a. [https://unix.stackexchange.com/questions/12383/how-can-i-view-gzipped-files-in-less-without-having-to-type-zless#12385]

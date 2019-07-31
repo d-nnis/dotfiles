@@ -1,0 +1,12 @@
+[submodule "urxvt/ext/urxvt-font-size"]
+	path = urxvt/ext/urxvt-font-size
+	url = https://github.com/majutsushi/urxvt-font-size
+[submodule "urxvt/ext/urxvt-perls"]
+	path = urxvt/ext/urxvt-perls
+	url = https://github.com/muennich/urxvt-perls
+[submodule "zimfw"]
+	path = zimfw
+	url = https://github.com/d-nnis/zimfw
+[submodule "zsh-zim"]
+	path = zsh-zim
+	url = https://github.com/d-nnis/zimfw

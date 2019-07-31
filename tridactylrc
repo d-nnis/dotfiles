@@ -1,0 +1,34 @@
+
+unbind <C-f>
+
+" moving on tab/window
+
+bind j scrollline 5
+bind k scrollline -5
+
+
+" tabs
+
+bind H tabprev
+bind L tabnext
+bind ,td tabdetach
+
+" custom websites
+
+"bind ,w open https://web6.codeprobe.de/wiki/index.php?title=Browser#Alternativen
+
+" config management
+
+"bind <C-i> source ~/.tridactylrc
+bind ,r source ~/.tridactylrc
+
+set hintnames short
+
+set hintfiltermode vimperator
+set theme dark
+
+bind i echo 'high'
+
+
+
+" vim: ft=vim

@@ -1,0 +1,111 @@
+#!/usr/bin/env bash
+
+#clock - A bash clock that can run in your terminal window.
+function clock () {
+  while true;do clear;echo "===========";date +"%r";echo "===========";sleep 1;done
+} 
+
+# A much better calendar
+function today() {
+    local TMPDATE PARAM DASFILE
+    TMPDATE=$(date '+%m %Y')
+    PARAM=$(date '+%e ')
+    DASFILE="$HOME/.idag_tmp.$$"
+
+    cal -m $TMPDATE > $DASFILE
+
+    cat $DASFILE | \
+        sed -e "s/$PARAM/`tput smso`&`tput rmso`/"  
+    
+    echo -e "      \c"
+    date '+%T'
+    date '+%a %d/%m/%y Week %V'
+
+    /bin/rm -f $DASFILE  # /bin/rm so that my rm alias wont get it...
+}
+
+# CALCULATOR
+function calc {
+  echo "${1}"|bc -l;
+}
+
+# Fetch my IP address
+function myip() {
+  lynx -dump -hiddenlinks=ignore -nolist http://checkip.dyndns.org:8245/ | awk '{ print $4 }' | sed '/^$/d; s/^[ ]*//g; s/[ ]*$//g'
+}
+
+function my_ps() {
+  ps $@ -u $USER -o pid,%cpu,%mem,bsdtime,command ; 
+}
+
+
+function pp() {
+  my_ps f | awk '!/awk/ && $0~var' var=${1:-".*"} ;
+}
+
+function ii() {   # get current host related info
+  echo -e "\nYou are logged on ${RED}$HOST"
+  echo -e "\nAdditionnal information:$NC " ; uname -a
+  echo -e "\n${RED}Users logged on:$NC " ; w -h
+  echo -e "\n${RED}Current date :$NC " ; date
+  echo -e "\n${RED}Machine stats :$NC " ; uptime
+  echo -e "\n${RED}Memory stats :$NC " ; free
+  my_ip 2>&- ;
+  #echo -e "\n${RED}Local IP Address :$NC" ; /sbin/ifconfig | awk /'inet addr/ {print $2}'
+  echo -e "\n${RED}Local IP Address :$NC" ; ip a | awk /inet/ | awk '{print $2}'
+  echo -e "\n${RED}ISP Address :$NC" ; myip
+  echo
+}
+
+function treegraph() { # Graphical tree of sub-directories
+  ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/ /' -e 's/-/|/'
+}
+
+function cmdoften() { # List of commands you use most often
+  history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn | head
+}
+
+# creation time of file 
+# s.a. http://askubuntu.com/questions/470134/how-to-find-the-creation-time-of-a-file
+get_crtime () {
+  for target in "${@}"; do
+    inode=$(sudo stat -c '%i' "${target}")
+    fs=$(df  --output=source "${target}"  | tail -1)
+    crtime=$(sudo debugfs -R 'stat <'"${inode}"'>' "${fs}" 2>/dev/null | grep -oP 'crtime.*--\s*\K.*')
+    printf "%s\t%s\n" "${target}" "${crtime}"
+  done
+}
+
+## tmux automatic switching
+# WIP: errorcode does not reach...
+tmux_aware() {
+  if [ -z "$TMUX" ]; then
+    tmux # start-server
+  fi
+#      tmux new-session -d -s "$tmux_session" \; \
+#           set-option -t "$tmux_session" destroy-unattached off &> /dev/null
+#      # Attach to the 'prezto' session or to the last session used.
+#            exec tmux $_tmux_iterm_integration attach-session
+#
+  #if [ "$?" -gt "1" ]; then
+  #  echo "no tmux session"
+  #  echo "*start one"
+  #  exit 0
+  #fi
+  #sessions=$(tmux ls | awk '{print $1}' | sed 's/://')
+  #num_sessions=$(echo $sessions | wc -l)
+  #
+  #if [ "$num_sessions" -gt "1" ]; then
+  #  echo "there are $num_sessions" tmux sessions
+  #else
+  #  echo "attaching to tmux session"
+  #  $(tmux at)
+  #fi
+
+}
+
+
+
+#TODO: neovim shows: unexpected "("
+# vim: ft=sh
+

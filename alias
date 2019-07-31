@@ -1,0 +1,240 @@
+
+## TODO: shell-commons (zsh & bash) in one file outside of alias
+stty -ixon
+GPG_TTY=$(tty)
+export GPG_TTY
+
+LC_ALL=en_US.utf8
+export LC_ALL
+
+## /shell-commons
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+  alias ls='ls --color=always'
+  alias grep='grep --color=always'
+  alias fgrep='fgrep --color=always'
+  alias egrep='egrep --color=always'
+  #alias less='less -R'
+fi
+
+export LESS='-F -i -M -R -w -X -z-4 -j.1'
+
+TS1="+%y-%m-%d %H-%M"
+TS2="+%y-%m-%d %H-%M-%S"
+
+# some more ls aliases
+alias ll='ls -l'
+#alias la='ls -lah --time-style=iso'
+alias la='ls -lah --time-style="$TS1"'
+alias lal='la L'
+alias lad='la -d'
+alias l='ls -aCF' # show in columns with classifiers
+
+## activated git aliases
+alias gital='alias | grep git | less && git al'
+alias gitsubmodurl='perl -pi -e "s#ssh\:\/\/git\@github.com\/d\-nnis#git\@freddy:~\/gitspace#" '
+#source ~/dotfiles/alias.git
+
+alias rm='rm -I'
+alias watch='watch -d'
+alias mulch='multitail -R 2 -l '
+alias diffdir='/usr/bin/diff -rq'
+alias tmux='tmux -2'
+alias info='info --vi-keys'
+alias vifm='vifm .'
+alias xclip='xclip -selection clip'
+alias xsel='xsel -b'
+#alias tar='tar -v' # only works with UNIX-style usage
+
+alias r='fc -s'
+
+## zsh specifica
+# $SHELL is not reliable?
+if [[ $BASH != *bash ]]; then
+  ## suffix aliases
+  alias -s deb='dpkg -I '
+  #alias -s pl=perl
+  alias -s pdf=xdg-open
+  #alias -s html=firefox
+  alias -s html=xdg-open
+  #http://vimhelp.appspot.com/help.txt.html
+
+  ## global aliases
+  alias -g G='|grep ' # cat file.txt G error
+  alias -g L='|less ' # <massive file at stdout> L
+  alias -g V='|xargs vi ' # edit files
+  alias -g W='|xargs which ' # resolve stream if filenames into full paths
+  alias -g X='|xclip' # copy stdout to clipboard
+  alias -g A='|xargs -0 aginfiles '  # find in a list with ag.
+                                     # E.g. dpkg -L asciidoc A "-A2 -B2" "Vorwort"
+  alias -g H='|head ' # show head
+  alias -g T='|tail ' # show tail
+
+
+else  # is bash
+  alias ..='cd ..'
+  alias ...='cd ../..'
+fi
+
+## hash'd dirs
+hash -d doc=/usr/share/doc
+hash -d dot=~/dotfiles
+[ -d "$HOME/bin" ] && hash -d mybin=$HOME/bin
+[ -d "/media/freddy" ] && hash -d fred=/media/freddy
+
+## specifica {{{
+[ -d ~/PDF ]  && hash -d pdf=~/PDF
+[ -d "/home/dennis/owncloud_maw" ] && hash -d ocm=/home/dennis/owncloud_maw
+[ -d "/home/dennis/owncloud_maw/Mag/kollektivistisch" ] && hash -d koll=/home/dennis/owncloud_maw/Mag/kollektivistisch
+## }}}
+
+## asciidoc toolchain
+if [ -x $((which a2x) > /dev/null) ]; then
+  :
+  # replaced by a2pdf.sh
+   #alias a2pdf_latex='a2x -v -f pdf -L --asciidoc-opts="-v -b docbook -d book -f /etc/asciidoc/lang-de.conf" --dblatex-opts="-V -T db2latex"'
+   #alias a2pdf_latex='a2x -v -f pdf -L --asciidoc-opts="-a lang=de -v -b docbook -d book -f /etc/asciidoc/lang-de.conf" --dblatex-opts="-V -T db2latex"'
+fi
+
+
+
+alias confed=configedit
+#alias configedit="cd ~/dotfiles && vi ~/dotfiles/vimrc ~/dotfiles/bashrc ~/dotfiles/tmux.conf ~/dotfiles/zprezto/runcoms/zpreztorc ~/dotfiles/alias ~/dotfiles/zprezto/runcoms/zprofile ~/dotfiles/zprezto/runcoms/zshenv ~/dotfiles/zprezto/runcoms/zshrc ~/dotfiles/vimperatorrc ~/dotfiles/Xmodmap ~/dotfiles/Xresources"
+alias configedit="cd ~/dotfiles && \
+  vi ~/dotfiles/vimrc \
+  ~/.config/vifm/vifmrc \
+  ~/.bashrc \
+  ~/.tmux.conf \
+  ~/dotfiles/alias \
+  ~/.Xmodmap \
+  ~/.Xresources \
+  ~/.zpreztorc \
+  ~/.zprofile \
+  ~/.zshenv \
+  ~/.zshrc \
+  ~/.tridactylrc \
+  ~/.config/qutebrowser/autoconfig.yml \
+  ~/.config/qutebrowser/config.py "
+
+#alias awconf='vim ~/.config/awesome/rc.lua && awesome -k ~/.config/awesome/rc.lua'
+alias awconf='vim ~/.config/awesome/rc.lua'
+
+#alias confrel=configreload
+#configreload() {
+#  echo "Reloading..."
+#  if [[ $BASH != *bash ]]; then
+#    echo "ZSH & Prezto"
+#    . ~/.zshrc
+#    . ~/.zpreztorc
+#  else
+#    echo "BASH"
+#    . ~/.bashrc
+#  fi
+#  echo "Xresources"
+#}
+
+alias confrel=configreload
+configreload() {
+  echo "Reloading..."
+  if [[ $BASH != *bash ]]; then
+    echo "ZSH & Prezto"
+    . ~/.zshrc
+    . ~/.zpreztorc
+  else
+    echo "BASH"
+    . ~/.bashrc
+  fi
+  echo "Xresources"
+  xrdb ~/.Xresources
+  [ -f $HOME/.Xresources.local ] && xrdb -override ~/.Xresources.local
+  if [ "$1" = "-a" ];then
+    echo "Xmodmap"
+    xmodmap ~/.Xmodmap
+    if [ -f ~/.Xmodmap.local ]; then
+      echo .Xmodmap.local
+      xmodmap ~/.Xmodmap.local
+    fi
+    echo xbindkeys
+    xbindkeys -v
+    echo "fc-cache fonts"
+    fc-cache -v ~/.fonts
+  else
+    echo "Not reloaded: Xmodmap, xbindkeys, fonts (do so with '-a')"
+  fi
+  echo "Done."
+}
+
+# programs
+# ranger shows correct colors with this
+alias ranger='TERM=xterm-256color ranger'
+
+[ -x /usr/bin/pacpl ] &&  alias pacpl_std="pacpl --to mp3 -v --bitrate 190 --delete"
+[ -x /usr/bin/pacpl ] &&  alias pacpl="pacpl -v"
+alias lpstat='lpstat -t'
+#TODO: with xargs {}
+alias lpqueue='multitail -R 2 -l lpq'
+alias aptup='sudo apt-get update --yes && sudo apt-get upgrade --yes'
+alias getclip='echo "$(xsel)"'
+#alias hardcopy='man -t multitail | lpr -m'
+
+alias jobs='jobs -l'
+#alias j='jobs'
+alias xload='xload -update 1 -scale 2 -hl brown -jumpscroll 1'
+if [ -x /usr/bin/display ]; then
+  alias display='display -geometry 600x800'
+  alias d=display
+  alias orient='identify -format "orientation: %[orientation]\ngeometry: %g"'
+fi
+
+[ -x /usr/bin/feh ] && alias feh='feh -g 600x800'
+
+## unix porn {{{
+alias lx='la -XB'		# sort by extension
+alias lk='la -Sr'              # sort by size, reverse: biggest last
+#alias lc='ls -lcr --color=always'		# sort by change time, long format
+#alias lu='ls -lur --color=always'		# sort by access time (also use)
+#alias lt='ls -lStr --color=always'              # sort by date
+#alias lla='la -t | head -n21' # show 20 of (la)test files (mtime), descending order
+alias ltm='la -tr --sort=time' # sort by modif. time, mtime, time of data in file
+alias ltc='la -cr --sort=time'		# sort by (c)hange time (last modification), reverse: latest is last entry 
+alias lta='la -ur --sort=time'		# sort by (u)se/ access time (atime)
+#alias lam='ltm | tail -n20' # show 20 of (la)test files, which where (m)odified # does not work if given an argument
+function lam () {
+  ltm $@ | tail -n20
+}
+
+
+alias lr='ls -lR'               # recursive ls
+alias lm='ls -al |less'         # pipe through 'more'
+alias tree='tree -Csu'		# nice alternative to 'ls'
+alias lisa='ls -lisa'
+alias lsperm='ls -l | sed -e 's/rwx/7/g' | sed -e 's/r--/4/g' | sed -e 's/r-x/5/g' | sed -e 's/rw-/6/g' | sed -e 's/---/0/g''
+alias spacewaste="du -s * | sort -n | tail" # show size of subdirs
+alias lssize='du -sh * | sort -n | more'  # show files too
+alias rm='rm -v'
+alias mv='mv -v'
+alias cp='cp -v'
+alias mounttable='mount | column -t'
+alias mount='mount -v'
+alias umount='umount -v'
+
+alias psaux='ps ax -eo user,pid,priority,args'
+alias ping='ping -c 10'
+alias openports='netstat -nape --inet'
+
+alias nosound='for i in *; do mplayer "$i" -nosound; done'
+alias fullscreen='for i in *; do mplayer "$i" -fs; done'
+alias fullscreennosound='for i in *; do mplayer "$i" -fs -nosound; done'
+
+alias 256colors='for code in {0..255}; do echo -e "\e[38;05;${code}m $code: Test"; done'
+alias connectednow="lsof -P -i -n"
+
+## / unix porn }}}
+
+
+
+[ -f ~/.alias.local ] && source ~/.alias.local
+
+# vim: syntax=sh

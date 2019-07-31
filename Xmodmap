@@ -1,0 +1,14 @@
+!! Swap caps lock and escape
+!remove Lock = Caps_Lock
+!! keysym Escape = Caps_Lock
+!keysym Caps_Lock = Escape
+!add Lock = Caps_Lock
+!
+!! keysym Alt_L = Meta_L Alt_L
+!keysym Alt_L = Alt_L
+!
+!! TODO: 2 errors encountered...
+!DONE:
+clear lock
+!keycode 66 is original lock
+keycode 66 = Escape

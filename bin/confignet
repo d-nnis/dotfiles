@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+sudo ifconfig | grep wlan0
+ret=$?
+cmd="route add -net 0.0.0.0 gw 192.168.0.1"
+
+if [ "$ret" = "0" ]; then
+  dev=wlan0
+else
+  # just for echoing the eth0 device
+  # according to ifconfig record
+  sudo ifconfig | grep eth0
+  dev=eth0
+fi
+
+cmd+=" $dev"
+
+echo "add ip route:"
+echo "$cmd"
+sudo $cmd
+
+ret=$?
+echo "returncode: $ret"
+
+if [[ $ret > 0 ]]; then
+  echo "there was an error, route already exists?"
+  sudo route -n
+fi

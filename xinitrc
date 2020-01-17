@@ -20,7 +20,9 @@ xload &
 /home/dennis/bin/showvol.sh &
 
 
-#sleep 1
+sleep 1
 orage -t &
 
 #exec awesome
+
+echo xinitrc done

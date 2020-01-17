@@ -92,16 +92,22 @@ settings:
     - twitter.de
   content.javascript.enabled:
     '*.bandcamp.com/*': true
+    '*://426028.landwehr-hosting.de/*': true
     '*://bandcamp.com/*': true
+    '*://db.codeprobe.de/*': true
+    '*://dict.leo.org/*': true
     '*://duckduckgo.com/*': false
     '*://github.com/*': false
     '*://gitlab.com/*': true
+    '*://mega.co.nz/*': true
     '*://posteo.de/*': true
+    '*://ps.bahn.de/*': true
     '*://soundcloud.com/*': true
     '*://stackoverflow.com/*': true
     '*://twitter.com/*': true
     '*://vim.fandom.com/*': false
     '*://web6.codeprobe.de/*': true
+    '*://www.berliner-sparkasse.de/*': true
     '*://www.ebay-kleinanzeigen.de/*': true
     '*://www.ebay.com/*': true
     '*://www.gmx.net/*': true
@@ -113,6 +119,7 @@ settings:
     '*://www.openstreetmap.org/*': true
     '*://www.wolframalpha.com/*': true
     '*://www.youtube.com/*': true
+    '*://zeitgeist-personalservice.com/*': true
     global: false
   content.pdfjs:
     global: true

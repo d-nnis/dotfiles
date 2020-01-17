@@ -35,7 +35,8 @@ alias l='ls -aCF' # show in columns with classifiers
 ## activated git aliases
 alias gital='alias | grep git | less && git al'
 alias gitsubmodurl='perl -pi -e "s#ssh\:\/\/git\@github.com\/d\-nnis#git\@freddy:~\/gitspace#" '
-#source ~/dotfiles/alias.git
+# FIXME: gst exits the shell!?
+source ~/dotfiles/alias.git
 
 alias rm='rm -I'
 alias watch='watch -d'
@@ -233,7 +234,9 @@ alias connectednow="lsof -P -i -n"
 
 ## / unix porn }}}
 
-
+zet() {
+  vim "+Zet $*"
+}
 
 [ -f ~/.alias.local ] && source ~/.alias.local
 

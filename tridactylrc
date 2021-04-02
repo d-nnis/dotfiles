@@ -15,8 +15,6 @@ bind ,td tabdetach
 
 " custom websites
 
-"bind ,w open https://web6.codeprobe.de/wiki/index.php?title=Browser#Alternativen
-
 " config management
 
 "bind <C-i> source ~/.tridactylrc
